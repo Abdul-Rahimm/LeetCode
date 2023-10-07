@@ -25,9 +25,9 @@ int solve(int idx,int searchcost,int maxsofar){
     for(int i = 1; i <= M ; i++){
         
         if(i > maxsofar)
-            result += (solve(idx+1,searchcost+1,i)) % MOD;
+            result = (result + solve(idx+1,searchcost+1,i)) % MOD;
         else
-            result += (solve(idx+1,searchcost,maxsofar)) % MOD;
+            result = (result + solve(idx+1,searchcost,maxsofar)) % MOD;
 
     }
     
@@ -41,9 +41,4 @@ int numOfArrays(int n, int m, int k) {
     
     memset(dp,-1,sizeof(dp));
     return solve(0,0,0);
-}
-int main(){
-
-
-
 }
