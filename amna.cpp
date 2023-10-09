@@ -14,4 +14,6 @@ int main(){
     cout << x << endl;
     cout << name << endl;
 
+    cout << "abdul rahim is github champ" << endl;
+
 }
