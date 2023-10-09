@@ -9,8 +9,8 @@ typedef vector<vi> vvi;
 
 int main(){
     int x = 10;
-
+    string name = "amna";
     cout << x << endl;
-
+    cout << name << endl;
 
 }
