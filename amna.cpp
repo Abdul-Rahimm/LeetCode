@@ -5,7 +5,9 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
  
-
+void print(){
+    cout << "sir is scaring" << endl;
+}
 
 int main(){
     //stable
@@ -15,5 +17,7 @@ int main(){
     cout << name << endl;
 
     cout << "abdul rahim is github champ" << endl;
+
+    print();
 
 }
