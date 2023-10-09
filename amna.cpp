@@ -5,19 +5,8 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
  
-void print(){
-    cout << "sir is scaring" << endl;
-}
 
 int main(){
-    //stable
-    int x = 10;
-    string name = "amna";
-    cout << x << endl;
-    cout << name << endl;
-
-    cout << "abdul rahim is github champ" << endl;
-
-    print();
+   
 
 }
