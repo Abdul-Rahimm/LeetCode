@@ -12,16 +12,19 @@ void print(vi nums){
 int n;
 int search_left_most(vi &nums, int target){
     int left_most = -1;
-
+    int num_mid;
     int l = 0 , r = n-1 ;
-    int mid = (l + (r-l))/2;
+    
 
     while(l <= r){
-        if(nums[mid] == target){
+        int mid = (l + (r-l))/2;
+        num_mid = nums[mid];
+        
+        if(num_mid == target){
             left_most= mid;
             r = mid-1;
         }
-        else if(nums[mid] > target)
+        else if(num_mid > target)
             r = mid-1;
         else   
             l = mid+1;
@@ -30,17 +33,19 @@ int search_left_most(vi &nums, int target){
     return left_most;
 }
 int search_right_most(vi &nums, int target){
-      int r_most = -1;
-
+    int r_most = -1;
+    int num_mid;
     int l = 0 , r = n-1 ;
-    int mid = (l + (r-l))/2;
 
     while(l <= r){
-        if(nums[mid] == target){
+        int mid = (l + (r-l))/2;
+        num_mid = nums[mid];
+
+        if(num_mid == target){
             r_most= mid;
             l = mid+1;
         }
-        else if(nums[mid] > target)
+        else if(num_mid > target)
             r = mid-1;
         else   
             l = mid+1;
