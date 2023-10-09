@@ -13,5 +13,5 @@ int add(int a,int b){
 
 int main(){
    cout << add(2,3) << endl;
-
+    cout << mul(10,10) << endl;
 }
