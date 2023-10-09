@@ -4,9 +4,12 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 typedef vector<int> vi;
 typedef vector<vi> vvi;
- 
+
+int add(int a,int b){
+    return a+b;
+}
 
 int main(){
-   
+   cout << add(2,3) << endl;
 
 }
