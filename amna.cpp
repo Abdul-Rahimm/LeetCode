@@ -8,6 +8,7 @@ typedef vector<vi> vvi;
 
 
 int main(){
+    //stable
     int x = 10;
     string name = "amna";
     cout << x << endl;
