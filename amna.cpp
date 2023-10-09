@@ -4,7 +4,9 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 typedef vector<int> vi;
 typedef vector<vi> vvi;
-
+int mul (int a,int b){
+    return a*b;
+}
 int add(int a,int b){
     return a+b;
 }
