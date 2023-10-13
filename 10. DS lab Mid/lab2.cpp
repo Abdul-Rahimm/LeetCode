@@ -71,18 +71,7 @@ void print(vector<T>& vec) {
     
     cout << endl;
 }
-// بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
 
-typedef vector<vector<bool>> vbb;
-typedef vector<vector<char>> vcc;
-
-vector<pair<int,int>> dir{{0,1},{0,-1},{1,0},{-1,0}, 
-                            {-1,-1},{-1,1},{1,-1},{1,1}};
-
-bool helper(vcc grid, string word, int idx,int i, int j, int word_size,vbb &vis);
-bool solver(vcc grid, string word);
-vector<string> solve(vcc grid, vector<string> dict);
-template <typename T> void print(vector<T>& vec);
 
 int main(){
     vector<vector<char>> grid {{'c','a','t'},{'r','r','e'},{'t','o','n'}};
