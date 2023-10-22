@@ -1,9 +1,10 @@
 *.exe
 *.json
 *.cph
+*.bin
 
 October/12. h solved on own.cpp
 lab.cpp
 codeforces.cpp
 graph concepts.cpp
-01 knapsack.cpp
+
