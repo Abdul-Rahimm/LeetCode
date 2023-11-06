@@ -7,7 +7,7 @@ typedef vector<vi> vvi;
  
 int solve(vi nums,int start,int end){
     
-    if(end-start > 2){
+    if(end-start > 1){
         int mid = start + (end-start)/2;
         int a = solve(nums,start,mid);
         int b = solve(nums,mid+1,end);
