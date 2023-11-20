@@ -26,22 +26,37 @@ int find(int i, vi parent){
     if(i == parent[i])
         return i;  
 
-    return find(parent[i],parent);
+    return parent[i] = find(parent[i],parent);
 }
-void Union(int x, int y, vi &parent){
+void Union(int x, int y, vi &parent, vi &rank){
 
     int x_parent = find(x,parent);
     int y_parent = find(y,parent);
 
-    if(x_parent != y_parent){
-        //not in the same set/part
-        parent[y_parent] = x_parent;
+    // if(x_parent != y_parent){
+    //     //not in the same set/part
+    //     parent[y_parent] = x_parent;
+    // }
+
+    if(x_parent == y_parent){
+        return;
     }
 
+    if(rank[x_parent] > rank[y_parent]){
+        parent[y_parent] = x_parent;    //make x the papa
+    }
+    else if(rank[y_parent] > rank[x_parent]){
+        parent[x_parent] = y_parent;    //make y the papa
+    }
+    else{
+        parent[y_parent] = x_parent;    //make x the papa
+        rank[x_parent]++;
+    }
 }
 
 int main(){
     vector<int> parent(8);
+    vector<int> rank(8, 0);
     fill(parent);     //fills the parent array
 
     addedge(1,0,parent);
@@ -50,7 +65,7 @@ int main(){
     addedge(7,6,parent);
     
     // cout << find(5,parent) << endl;
-    Union(0,3,parent);
+    Union(0,3,parent,rank);
     print(parent);
     
 
