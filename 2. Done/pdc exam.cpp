@@ -14,9 +14,8 @@ int solve(vi nums,int start,int end){
 
         return min(a,b);
     }
-
+    
     return min(nums[start],nums[end]);
-
 }
 
 int main(){
@@ -24,12 +23,9 @@ int main(){
     cin >> t;
     vector<int> nums(t);
 
-    for(int i = 0 ; i < t ; i++){
+    for(int i = 0 ; i < t ; i++)
         cin >> nums[i];
-    }
-
+    
     int ans = solve(nums,0,t-1);
-
     cout << ans;
-
 }
