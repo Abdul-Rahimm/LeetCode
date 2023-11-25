@@ -14,7 +14,8 @@ vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
             diff[i] = nums[i+1] - nums[i];
         
         
-        for(int i = 0; i < n-1 ; i++){
+        for(int x = 0; x < n-1 ; x++){
+            int i = x;
             int ans = 0;
             int j = i;
             
@@ -22,13 +23,13 @@ vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
                 if(j >= 0 && j != i)
                     ans += diff[j];
                 
-                ans += diff[i];
+                ans += ans + diff[i];
                 
                 i++;
                 j--;
             }
             
-            answ[i] = ans;
+            answ[x] = ans;
         }
         return answ;
     }
