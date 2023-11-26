@@ -41,9 +41,8 @@ bool solver(vector<vector<char>> grid, string word){
                 vector<vector<bool>> vis(rows, vector<bool>(cols, false));
 
                 if(helper(grid,word,0,i,j,0,vis)){
-                    return true;
-                    vector<int> pr{i, j};
-                    current.push_back(pr);
+                    current.push_back({i,j});
+                    return true;   
                 }
             }
 
