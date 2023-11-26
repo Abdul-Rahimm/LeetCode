@@ -54,7 +54,6 @@ bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int wo
     vis[i][j] = false;  //upon exiting
     return false;
 }
-
 bool solver(vector<vector<char>> grid, string word,int &sx, int &sy){
     int orig_sx = sx, orig_sy = sy;
    for(sx = orig_sx; sx < rows ; sx++){
@@ -71,7 +70,6 @@ bool solver(vector<vector<char>> grid, string word,int &sx, int &sy){
 
     return false;
 }
-
 void solve(vector<vector<char>> &grid, string &word, int &sx, int &sy){
     int orig_sx = sx, orig_sy = sy;
 
