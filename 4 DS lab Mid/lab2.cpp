@@ -9,8 +9,7 @@ typedef vector<vector<char>> vcc;
 
 int rows,cols;
 
-vector<pair<int,int>> dir{{0,1},{0,-1},{1,0},{-1,0}, 
-                            {-1,-1},{-1,1},{1,-1},{1,1}};
+vector<pair<int,int>> dir{{0,1},{0,-1},{1,0},{-1,0}};
 
 bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int word_size,vector<vector<bool>> &vis){ 
     if(i >= rows || j >= cols || i < 0 || j < 0 || word_size > word.size() || word[idx] != grid[i][j])
@@ -72,16 +71,24 @@ void print(vector<T>& vec) {
     cout << endl;
 }
 
+void print(vector<vector<char>> grid){
+    for(vector<char> row: grid){
+        for(char i: row)
+            cout << i << " ";
+        cout << endl;
+    }
+}
 
 int main(){
-    vector<vector<char>> grid {{'c','a','t'},{'r','r','e'},{'t','o','n'}};
-    vector<string> dict{"tz","toon","cater","moon","art","not","eat","ton","tan"};
+    vector<vector<char>> grid {{'o','f','o','o','t'},{'v','o','q','u','o'},{'e','o','i','h','o'},{'r','t','g','g','f'}};
+    vector<string> dict{"foot"};
 
     rows = grid.size();
     cols = grid[0].size();
+    print(grid);
 
-    vector<string> ans = solve(grid,dict);
-    print(ans);
+    // vector<string> ans = solve(grid,dict);
+    // print(ans);
 
 
 }
