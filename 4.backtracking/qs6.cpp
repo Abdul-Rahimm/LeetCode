@@ -58,7 +58,7 @@ bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int wo
 bool solver(vector<vector<char>> grid, string word,int &sx, int &sy){
     int orig_sx = sx, orig_sy = sy;
    for(sx = orig_sx; sx < rows ; sx++){
-        for(sy = orig_sy ; sy < cols ; sy++){
+        for(sy = 0 ; sy < cols ; sy++){
 
             if(word[0] == grid[sx][sy]){
                 vector<vector<bool>> vis(rows, vector<bool>(cols, false));
@@ -73,6 +73,7 @@ bool solver(vector<vector<char>> grid, string word,int &sx, int &sy){
 }
 
 void solve(vector<vector<char>> &grid, string &word, int &sx, int &sy){
+    int orig_sx = sx, orig_sy = sy;
 
     if(solver(grid,word,sx,sy)){
         coordinates.push_back(current);
@@ -81,6 +82,9 @@ void solve(vector<vector<char>> &grid, string &word, int &sx, int &sy){
 
     if(sx >= rows-1 && sy >= cols-1)        //we have reached the end of the matrix
         return;                             //stop exploring
+
+    if((sx != orig_sx || sy != orig_sy) && (sx != 0 && sy != 0))
+        st.clear();
 
     solve(grid,word,sx,sy);                 //matrix is left to explore
 
@@ -115,10 +119,9 @@ void print(vector<vector<vector<int>>> ans){
 
 int main(){
     vector<vector<char>> grid  {{'o','f','o','o','t'},
-                                {'v','o','q','u','o'},
-                                {'e','o','i','h','o'},
+                                {'q','o','q','u','o'},
+                                {'a','o','i','h','o'},
                                 {'r','t','g','g','f'}};
-    vector<string> dict{"foot"};
     string word = "foot";
 
     rows = grid.size();
