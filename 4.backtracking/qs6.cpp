@@ -18,6 +18,9 @@ bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int wo
         return false;       //cant go back from where came
     vis[i][j] = true;       //mark true
 
+    vector<int> record{i,j};    //make record to be inserted for coordinated
+    current.push_back(record);  //insert record
+
     if(word_size == word.size()-1 && word[idx] == grid[i][j])
         return true;
     
@@ -40,30 +43,22 @@ bool solver(vector<vector<char>> grid, string word){
             if(word[0] == grid[i][j]){
                 vector<vector<bool>> vis(rows, vector<bool>(cols, false));
 
-                if(helper(grid,word,0,i,j,0,vis)){
-                    current.push_back({i,j});
+                if(helper(grid,word,0,i,j,0,vis))
                     return true;   
-                }
             }
-
         }
     }
 
     return false;
 }
 
-vector<string> solve(vector<vector<char>> &grid, vector<string> &words){
-     vector<string> ret;
+void solve(vector<vector<char>> &grid, string &word){
 
-    for(string word: words){
-        if(solver(grid,word)){
-            ret.push_back(word);
-            coordinates.push_back(current);
-        }
-        current.clear();
+    if(solver(grid,word)){
+        coordinates.push_back(current);
     }
-
-    return ret;
+        current.clear();
+    
 }
 void print(vector<string>& vec) {
     for (string item : vec) 
@@ -73,12 +68,20 @@ void print(vector<string>& vec) {
 }
 void print(vector<vector<vector<int>>> ans){
     for(vector<vector<int>> two_d : ans){
+        int count = 1;
+        cout << "Occurence " << count << ": ";
+
         for(vector<int> row: two_d){
-            cout << "{ ";
+            int i = 0;
+            cout << "{";
             for(int i : row){
-                cout << i << " ";
+                if(i == 0)
+                    cout << i << " , ";
+                else    
+                    cout << i ;
+                i++;
             }
-             cout << "}";
+             cout << "} ";
         }
         cout << endl;
     }
@@ -87,15 +90,12 @@ void print(vector<vector<vector<int>>> ans){
 int main(){
     vector<vector<char>> grid {{'o','f','o','o','t'},{'v','o','q','u','o'},{'e','o','i','h','o'},{'r','t','g','g','f'}};
     vector<string> dict{"foot"};
+    string word = "foot";
 
     rows = grid.size();
     cols = grid[0].size();
     
-
-    vector<string> ans = solve(grid,dict);
-    print(ans);
+    solve(grid,word);
+    
     print(coordinates);
-
-
-
 }
