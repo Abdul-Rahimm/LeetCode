@@ -8,6 +8,18 @@ int rows, cols;
 vector<vector<vector<int>>> coordinates;
 vector<vector<int>> current;
 
+struct VectorHash {
+    size_t operator()(const std::vector<int>& vec) const {
+        std::hash<int> hasher;
+        size_t hash = 0;
+        for (int value : vec) {
+            hash ^= hasher(value) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+        }
+        return hash;
+    }
+};
+unordered_set<vector<int> , VectorHash> st;
+
 vector<pair<int,int>> dir{{0,1},{0,-1},{1,0},{-1,0}};
 
 bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int word_size,vector<vector<bool>> &vis){ 
@@ -28,22 +40,29 @@ bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int wo
         int new_i = pair.first;
         int new_j = pair.second;
 
+        vector<int> occurence{new_i,new_j, i,j};
+        if(st.find(occurence) != st.end())
+            continue;
+        
+        st.insert(occurence);
+
         if(helper(grid,word,idx+1,i + new_i,j + new_j,word_size+1,vis))
             return true;
     }
 
+    current.pop_back();
     vis[i][j] = false;  //upon exiting
     return false;
 }
 
-bool solver(vector<vector<char>> grid, string word){
-    for(int i = 0 ; i < rows ; i++){
-        for(int j = 0 ; j < cols ; j++){
+bool solver(vector<vector<char>> grid, string word,int &sx, int &sy){
+   for(sx ; sx < rows ; sx++){
+        for(sy ; sy < cols ; sy++){
 
-            if(word[0] == grid[i][j]){
+            if(word[0] == grid[sx][sy]){
                 vector<vector<bool>> vis(rows, vector<bool>(cols, false));
 
-                if(helper(grid,word,0,i,j,0,vis))
+                if(helper(grid,word,0,sx,sy,0,vis))
                     return true;   
             }
         }
@@ -52,13 +71,21 @@ bool solver(vector<vector<char>> grid, string word){
     return false;
 }
 
-void solve(vector<vector<char>> &grid, string &word){
+void solve(vector<vector<char>> &grid, string &word, int &sx, int &sy){
 
-    if(solver(grid,word)){
+    if(solver(grid,word,sx,sy)){
         coordinates.push_back(current);
     }
-        current.clear();
+    current.clear();
+    cout << sx << " " << sy << endl;
     
+    // sy++; sx++;                                //one step ahead and then explore
+
+    if(sx >= rows-1 && sy >= cols-1)        //we have reached the end of the matrix
+        return;                             //stop exploring
+
+    solve(grid,word,sx,sy);                 //matrix is left to explore
+
 }
 void print(vector<string>& vec) {
     for (string item : vec) 
@@ -67,19 +94,20 @@ void print(vector<string>& vec) {
     cout << endl;
 }
 void print(vector<vector<vector<int>>> ans){
+    int count = 1;
     for(vector<vector<int>> two_d : ans){
-        int count = 1;
         cout << "Occurence " << count << ": ";
+        count++;
 
         for(vector<int> row: two_d){
-            int i = 0;
+            int x = 0;
             cout << "{";
             for(int i : row){
-                if(i == 0)
+                if(x == 0)
                     cout << i << " , ";
                 else    
                     cout << i ;
-                i++;
+                x++;
             }
              cout << "} ";
         }
@@ -88,14 +116,18 @@ void print(vector<vector<vector<int>>> ans){
 }
 
 int main(){
-    vector<vector<char>> grid {{'o','f','o','o','t'},{'v','o','q','u','o'},{'e','o','i','h','o'},{'r','t','g','g','f'}};
+    vector<vector<char>> grid  {{'o','f','o','o','t'},
+                                {'v','o','q','u','o'},
+                                {'e','o','i','h','o'},
+                                {'r','t','g','g','f'}};
     vector<string> dict{"foot"};
     string word = "foot";
 
     rows = grid.size();
     cols = grid[0].size();
     
-    solve(grid,word);
-    
+    int startx = 0, starty = 0;
+    solve(grid,word,startx,starty);
+  
     print(coordinates);
 }
