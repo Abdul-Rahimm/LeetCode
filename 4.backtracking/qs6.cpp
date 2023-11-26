@@ -56,8 +56,9 @@ bool helper(vector<vector<char>> grid, string word, int idx,int i, int j, int wo
 }
 
 bool solver(vector<vector<char>> grid, string word,int &sx, int &sy){
-   for(sx ; sx < rows ; sx++){
-        for(sy ; sy < cols ; sy++){
+    int orig_sx = sx, orig_sy = sy;
+   for(sx = orig_sx; sx < rows ; sx++){
+        for(sy = orig_sy ; sy < cols ; sy++){
 
             if(word[0] == grid[sx][sy]){
                 vector<vector<bool>> vis(rows, vector<bool>(cols, false));
@@ -77,9 +78,6 @@ void solve(vector<vector<char>> &grid, string &word, int &sx, int &sy){
         coordinates.push_back(current);
     }
     current.clear();
-    cout << sx << " " << sy << endl;
-    
-    // sy++; sx++;                                //one step ahead and then explore
 
     if(sx >= rows-1 && sy >= cols-1)        //we have reached the end of the matrix
         return;                             //stop exploring
