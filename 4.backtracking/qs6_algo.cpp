@@ -8,6 +8,8 @@ typedef vector<vector<bool>> vbb;
 typedef vector<vector<char>> vcc;
 
 int rows,cols;
+vector<vector<pair<int,int>>> coordinates;
+vector<pair<int,int>> current;
 
 vector<pair<int,int>> dir{{0,1},{0,-1},{1,0},{-1,0}};
 
@@ -41,9 +43,11 @@ bool solver(vector<vector<char>> grid, string word){
             if(word[0] == grid[i][j]){
                 vector<vector<bool>> vis(rows, vector<bool>(cols, false));
 
-                if(helper(grid,word,0,i,j,0,vis))
+                if(helper(grid,word,0,i,j,0,vis)){
                     return true;
-
+                    pair<int,int> pr = make_pair(i,j);
+                    current.push_back(pr);
+                }
             }
 
         }
@@ -56,23 +60,26 @@ vector<string> solve(vector<vector<char>> grid, vector<string> dict){
     vector<string> ret;
 
     for(string word: dict){
-        if(solver(grid,word))
+        if(solver(grid,word)){
             ret.push_back(word);
+            coordinates.push_back(current);
+            current.clear();
+        }
     }
 
     return ret;
 }
 
-template <typename T>
-void print(vector<T>& vec) {
-    for (T item : vec) 
+
+void print(vector<string>& vec) {
+    for (string item : vec) 
         cout << item << " ";
     
     cout << endl;
 }
-
-void print(vector<vector<char>> grid){
-    for(vector<char> row: grid){
+template <typename T>
+void print(vector<vector<T>> grid){
+    for(vector<T> row: grid){
         for(char i: row)
             cout << i << " ";
         cout << endl;
@@ -85,10 +92,11 @@ int main(){
 
     rows = grid.size();
     cols = grid[0].size();
-    print(grid);
+    // print(grid);
 
-    // vector<string> ans = solve(grid,dict);
-    // print(ans);
+    vector<string> ans = solve(grid,dict);
+    print(ans);
+    print(coordinates);
 
 
 }
