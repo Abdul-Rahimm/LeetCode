@@ -7,20 +7,18 @@ typedef vector<vi> vvi;
  
 int mod = 1e9 + 7;
 int dp[5001][10];
-unordered_map<int,vector<int>> adj;
-
-void fill(){
-    adj[0] = {4,6};
-    adj[1] = {8,6};
-    adj[2] = {7,9};
-    adj[3] = {4,8};
-    adj[4] = {0,3,9};
-    
-    adj[6] = {0,1,7};
-    adj[7] = {2,6};
-    adj[8] = {1,8};
-    adj[9] = {4,2};
-}
+vector<vector<int>> adj = {
+    {4, 6},
+    {6, 8},
+    {7, 9},
+    {4, 8},
+    {3, 9, 0},
+    {},
+    {1, 7, 0},
+    {2, 6},
+    {1, 3},
+    {2, 4}
+};
 
 int solve(int n, int cell){
     if(n == 0)
@@ -38,18 +36,16 @@ int solve(int n, int cell){
 }
 
 int knightDialer(int n) {
-    //fills adjacency list
-    fill();
+    
     memset(dp,-1,sizeof(dp));
-
     int result = 0;
     
     for(int i = 0 ; i <= 9 ; i++)
         result = (result + solve(n-1,i)) % mod;
     
     return result;
+    
 }
-
 int main(){
     int n;
     cin >> n;
